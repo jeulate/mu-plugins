@@ -9,6 +9,13 @@ if (!defined('ABSPATH')) exit;
 
 const PP_CLIENT_VIEW_CAP = 'pp_view_customers_list';
 
+// TEMPORAL: borrar rol para recrearlo limpio (usar 1 vez y luego borrar)
+add_action('admin_init', function () {
+    if (current_user_can('administrator')) {
+        remove_role('pp_client_viewer');
+    }
+});
+
 // 1) Crear rol (solo una vez)
 add_action('init', function () {
     if (!get_role('pp_client_viewer')) {
